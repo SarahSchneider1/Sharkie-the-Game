@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="img/buttons/favIcon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="js/audio.js"></script>
+    <script src="models/drawable-objects.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/status-bar-life.class.js"></script>
+    <script src="models/status-bar-poison.class.js"></script>
+    <script src="models/status-bar-coin.class.js"></script>
+    <script src="models/status-bar-endbossLife.js"></script>
+    <script src="models/shotable-objects.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/pufferfish.class.js"></script>
+    <script src="models/jellyfish.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/background-object.class.js"></script>
+    <script src="models/bubble.class.js"></script>
+    <script src="models/poison.class.js"></script>
+    <script src="models/coins.class.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="levels/level1.js"></script>
+ 
+
+    <title>Sharkie</title>
+</head>
+
+<body onload="init()">
+    <h1>SHARKIE</h1>
+
+    <div id="portraitScreen" class="v-none">
+        <img id="portraitImage" src="./img/buttons/rotate.png">
+        <p class="portraittext">Rotate your phone to landscape mode</p>
+    </div>
+
+    <div id="screen">
+        <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+        <label for="openSidebarMenu" class="sidebarIconToggle" onclick="toggleMenu()">
+            <div class="spinner diagonal part-1"></div>
+            <div class="spinner horizontal"></div>
+            <div class="spinner diagonal part-2"></div>
+        </label>
+        <div id="sidebarMenu">
+            <ul class="sidebarMenuInner">
+                <li onclick="showHowToPlay()"><img src="img/buttons/info.png"> Instruction</li>
+                <li onclick="toggleFullscreen()"><img id="fullscreen" src="img/buttons/fullscreen.png"> Fullscreen</li>
+                <li onclick="toggleAudio()"><img id="volume" src="img/buttons/mute.png"> Volumen</li>
+            </ul>
+        </div>
+
+
+        <div class="startScreen" id="startScreen">
+            <div class="menu">
+                <img class="button" id="buttonStart" src="img/buttons/start/1.png" onclick="startGame()">
+                <img class="button" id="buttonHowToPlay" src="img/buttons/key/howToPlay.png" onclick="showHowToPlay()">
+            </div>
+        </div>
+
+        <div class="howToPlayScreen v-none" id="howToPlayScreen">
+            <div class="backTo" onclick="backToMenuFromHowToPlay()">X</div>
+            <h2 class="info-title">Instructions</h2>
+            <div class="info-instructions">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="info-instruction-column">
+                                <img class="info-image" src="img/buttons/key/arrowKeys.png">
+                            </td>
+                            <td>
+                                <p class="instruction-text">Move Sharkie with the arrow keys</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="info-instruction-column">
+                                <img class="info-image2" src="img/buttons/key/Dkey.png">
+                            </td>
+                            <td>
+                                <p class="instruction-text">Swipe to attack the small fish</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="info-instruction-column">
+                                <img class="info-image3" src="img/buttons/key/SpaceBarKey.png">
+                            </td>
+                            <td>
+                                <p class="instruction-text">Make bubbles to attack jellyfishes and the endboss</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <span>Navigate Sharkie through the deep of the ocean. Let him collect coins and poison
+                                bottles, so Sharkie can make bubbles against enemeys.</span>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="v-none endScreen" id="endScreen">
+            <img class="gameOver d-none" id="gameOver" src="img/buttons/titles/endScreen/gameOver.png">
+            <img class="youWin d-none" id="youWin" src="img/buttons/titles/endScreen/youWin.png">
+            <img class="button" onclick="restart()" id="tryAgain" src="img/buttons/tryAgain/tryAgain.png">
+        </div>
+        <canvas id="canvas" width="720" height="480"></canvas>
+
+        <div class="mobilePanelLeft" id="mobilePanelLeft">
+            <div class="arrow-btn-top">
+                <img class="arrow-btn" id="arrow-btn-top" src="img/buttons/key/arrowButton.png">
+            </div>
+            <div class="arrow-btn-mid">
+                <img class="arrow-btn" id="arrow-btn-mid-left" src="img/buttons/key/arrowButton.png">
+                <img class="arrow-btn" id="arrow-btn-mid-right" src="img/buttons/key/arrowButton.png">
+            </div>
+            <div class="arrow-btn-bottom">
+                <img class="arrow-btn" id="arrow-btn-bottom" src="img/buttons/key/arrowButton.png">
+            </div>
+        </div>
+
+        <div class="mobilePanelRight" id="mobilePanelRight">
+            <img class="panelBtnRight" id="btn-bubble"
+                src="img/1.Sharkie/4.Attack/Bubble trap/Poisoned Bubble (for whale).png">
+            <img class="panelBtnRight" id="btn-slap" src="img/buttons/key/slapBtn.png">
+        </div>
+    </div>
+    <img class="button" id="buttonFullscreen" src="img/buttons/fullscreen/fullscreen.png" onclick="toggleFullscreen()">
+ 
+
+    <footer>
+        <a href="#impressumPopup">Impressum</a>
+    </footer>
+
+    <div id="impressumPopup" class="overlay">
+        <div class="popup">
+            <a href="#" class="close">&times;</a>
+            <h2>Impressum</h2>
+            <p>Sarah Schneider</p>
+            <p>Kreuzwiesen 12A</p>
+            <p>87547 Missen-Wilhams</p>
+            <p>Sarahschn95@outlook.de</p>
+        </div>
+    </div>
+       <script src="js/game.js"></script>
+</body>
+
+</html>
