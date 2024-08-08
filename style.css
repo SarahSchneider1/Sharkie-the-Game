@@ -526,6 +526,15 @@ footer a {
     font-size: 16px;
 }
 
+@media only screen and (max-height: 700px) {
+
+    #mobilePanelLeft,
+    .mobilePanelRight {
+        visibility: visible;
+    }
+
+}
+
 @media (max-width: 920px) {
     #screen {
         width: 100%;
@@ -539,11 +548,6 @@ footer a {
 @media only screen and (max-height: 620px) {
     h1 {
         display: none;
-    }
-
-    #mobilePanelLeft,
-    .mobilePanelRight {
-        visibility: visible;
     }
 
     #buttonFullscreen {

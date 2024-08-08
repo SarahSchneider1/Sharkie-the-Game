@@ -168,7 +168,7 @@ class Endboss extends MovableObject {
   isAttacking() {
     let timePassed = new Date().getTime() - this.lastAttack;
     timePassed = timePassed / 1000;
-    return timePassed < 1.5;
+    return timePassed < 1;
   }
 
   /**
@@ -179,7 +179,7 @@ class Endboss extends MovableObject {
       let time1 = new Date().getTime();
       if (this.attackTime <= time1) {
         this.lastAttack = new Date().getTime();
-        this.attackTime = new Date().getTime() + 5000;
+        this.attackTime = new Date().getTime() + 2500;
       }
     }, 1000);
   }
@@ -212,8 +212,6 @@ class Endboss extends MovableObject {
   playAnimation(images) {
     let i = this.currentImage % images.length;
     this.img = this.imageCache[images[i]];
-    if (images === this.IMAGES_DEAD) { 
-      this.currentImage++;
-    }
+    this.currentImage++;
   }
-}
+}  
