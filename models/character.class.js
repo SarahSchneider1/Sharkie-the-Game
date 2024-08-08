@@ -179,13 +179,14 @@ class Character extends MovableObject {
    * Handles sharkie's attacks, including slaps and bubble shots.
    */
   sharkieAttacks() {
+    if (this.isHurt()) return;  
     this.checkSlap();
     if (this.world.keyboard.SPACE && this.world.collectedPoison.length > 0) {
-      this.lastMove = new Date().getTime();
-      this.currentImage = 0;
-      this.setBubbleShotAnimationTime(1050);
+        this.lastMove = new Date().getTime();
+        this.currentImage = 0;
+        this.setBubbleShotAnimationTime(1050);
     }
-  }
+}
 
   /**
    * Moves sharkie to the right if the right arrow key is pressed and within level limits.
